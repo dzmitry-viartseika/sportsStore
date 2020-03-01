@@ -1,11 +1,11 @@
 <template>
     <div class="product">
       <div class="product-category">
-        CATEGOTY {{ productList }}
+        CATEGOTY
       </div>
       <div class="product-list">
         <div class="product-list-item"
-             v-for="product in productList"
+             v-for="product in filteredProducts"
              :key="product.id"
         >
           <h4 class="product-list-item__title">{{ product.name }}</h4>
@@ -23,20 +23,15 @@ export default {
   name: 'ProductsList',
   computed: {
     ...mapGetters(['productList']),
-    filteredProduct() {
-       this.productList.sort((a, b) => (a.price > b.price) ? 1 : -1);
-    },
+    // filteredProduct() {
+    //    this.productList.sort((a, b) => (a.price > b.price) ? 1 : -1);
+    // },
   },
   methods: {
-    ...mapActions(['fetchProducts']),
+    ...mapActions(['fetchProducts', 'filteredProducts']),
   },
   mounted() {
-    this.fetchProducts()
-      .then((response) => {
-        if (response) {
-          console.log('wertey');
-        }
-      });
+    this.fetchProducts();
   },
 };
 </script>
