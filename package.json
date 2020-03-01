@@ -6,12 +6,21 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "json": "json-server db.json -p 3500 -m authMiddleware.js"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
     "core-js": "^3.6.4",
+    "faker": "^4.1.0",
+    "font-awesome": "^4.7.0",
+    "json-server": "^0.16.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
+    "vuelidate": "^0.7.5",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
@@ -30,7 +39,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
-    "root": true,
+    "root": false,
     "env": {
       "node": true
     },
@@ -41,7 +50,14 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "rule": "off",
+      "arrow-body-style": 0,
+      "arrow-parens": [
+        "error",
+        "always"
+      ]
+    },
     "overrides": [
       {
         "files": [
