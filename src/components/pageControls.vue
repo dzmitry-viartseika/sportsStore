@@ -1,6 +1,11 @@
 <template>
     <div v-if="pageCount">
       <div>
+        <select name="" id="" @change="changePageSize($event)">
+          <option value="4">4 per page</option>
+          <option value="8">8 per page</option>
+          <option value="12">12 per page</option>
+        </select>
         <button v-for="i in pageNumbers"
                 :key="i"
                 :class="{'btn-primary': i === currentPage}"
@@ -25,7 +30,11 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['setCurrentPage']),
+    ...mapMutations(['setCurrentPage', 'setPageSize']),
+    changePageSize($event) {
+      console.log($event.target.value);
+      this.setPageSize(Number($event.target.value));
+    },
   },
 };
 </script>
