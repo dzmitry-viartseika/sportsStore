@@ -5,30 +5,32 @@
       </div>
       <div class="product-list">
         <div class="product-list-item"
-             v-for="product in filteredProducts"
+             v-for="product in processedProducts"
              :key="product.id"
         >
           <h4 class="product-list-item__title">{{ product.name }}</h4>
           <span class="product-list-item__price">{{ product.price }}</span>
           <div class="product-list-item__desc">{{ product.description }}</div>
         </div>
+        <pageControls></pageControls>
       </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import pageControls from './pageControls.vue';
 
 export default {
   name: 'ProductsList',
+  components: {
+    pageControls,
+  },
   computed: {
-    ...mapGetters(['productList']),
-    // filteredProduct() {
-    //    this.productList.sort((a, b) => (a.price > b.price) ? 1 : -1);
-    // },
+    ...mapGetters(['productList', 'filteredProducts', 'processedProducts']),
   },
   methods: {
-    ...mapActions(['fetchProducts', 'filteredProducts']),
+    ...mapActions(['fetchProducts']),
   },
   mounted() {
     this.fetchProducts();
