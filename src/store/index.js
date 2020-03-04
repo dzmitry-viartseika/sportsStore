@@ -8,10 +8,14 @@ export default new Vuex.Store({
     productList: [],
     currentPage: 1,
     pageSize: 4,
+    categories: [],
   },
   getters: {
     productList(state) {
       return state.productList;
+    },
+    categories(state) {
+      return state.categories;
     },
     processedProducts(state) {
       const index = (state.currentPage - 1) * state.pageSize;
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     setProducts(state, productList) {
       state.productList = productList;
     },
+    setCategories(state, categories) {
+      state.categories = categories;
+    },
     setCurrentPage(state, page) {
       state.currentPage = page;
     },
@@ -46,6 +53,19 @@ export default new Vuex.Store({
           return response.json()
             .then((data) => {
               commit('setProducts', data);
+            }).catch((e) => {
+              console.error(e);
+            });
+        });
+    },
+    fetchCategories({ commit }) {
+      const url = 'http://localhost:3500/category';
+      fetch(url)
+        .then((response) => {
+          return response.json()
+            .then((data) => {
+              console.log(data);
+              commit('setCategories', data);
             }).catch((e) => {
               console.error(e);
             });

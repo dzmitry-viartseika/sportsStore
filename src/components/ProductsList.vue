@@ -1,7 +1,13 @@
 <template>
     <div class="product">
       <div class="product-category">
-        CATEGOTY
+        <div class="product-category__title">CATEGOTY</div>
+        <div v-for="(category,i) in categories"
+             :key="i"
+             class="product-category__item"
+        >
+          {{ category.text }}
+        </div>
       </div>
       <div class="product-list">
         <div class="product-list-item"
@@ -27,13 +33,14 @@ export default {
     pageControls,
   },
   computed: {
-    ...mapGetters(['productList', 'filteredProducts', 'processedProducts']),
+    ...mapGetters(['productList', 'filteredProducts', 'processedProducts', 'categories']),
   },
   methods: {
-    ...mapActions(['fetchProducts']),
+    ...mapActions(['fetchProducts', 'fetchCategories']),
   },
   mounted() {
     this.fetchProducts();
+    this.fetchCategories();
   },
 };
 </script>
@@ -45,6 +52,17 @@ export default {
     &-category {
       width: 20%;
       background: green;
+      padding: 5px;
+      &__item {
+        width: 100%;
+        height: 60px;
+        background: lightslategray;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5px;
+      }
     }
     &-list {
       width: 100%;
