@@ -38,6 +38,15 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    addToCart(state, product) {
+      state.orderedProducts.push({
+        ...product,
+        quantity: 1,
+      });
+    },
+    removeFromCart(state, id) {
+      state.orderedProducts.splice(id, 1);
+    },
     setProducts(state, productList) {
       state.productList = productList;
     },
