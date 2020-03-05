@@ -5,6 +5,8 @@
         <div v-for="(category,i) in categories"
              :key="i"
              class="product-category__item"
+             :class="{'product-category__item_active': category.text === currentCategory}"
+             @click="setCurrentCategory(category.text)"
         >
           {{ category.text }}
         </div>
@@ -17,6 +19,7 @@
           <h4 class="product-list-item__title">{{ product.name }}</h4>
           <span class="product-list-item__price">{{ product.price }}</span>
           <div class="product-list-item__desc">{{ product.description }}</div>
+          <button>Add to Cart</button>
         </div>
         <pageControls></pageControls>
       </div>
@@ -24,7 +27,9 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import {
+  mapGetters, mapActions, mapMutations, mapState,
+} from 'vuex';
 import pageControls from './pageControls.vue';
 
 export default {
@@ -33,10 +38,12 @@ export default {
     pageControls,
   },
   computed: {
-    ...mapGetters(['productList', 'filteredProducts', 'processedProducts', 'categories']),
+    ...mapState(['currentCategory']),
+    ...mapGetters(['productList', 'filteredProducts', 'processedProducts', 'categories', 'productsFilteredByCategory']),
   },
   methods: {
     ...mapActions(['fetchProducts', 'fetchCategories']),
+    ...mapMutations(['setCurrentCategory']),
   },
   mounted() {
     this.fetchProducts();
@@ -62,6 +69,9 @@ export default {
         align-items: center;
         justify-content: center;
         margin-bottom: 5px;
+        &_active {
+          background: red;
+        }
       }
     }
     &-list {

@@ -9,22 +9,29 @@ export default new Vuex.Store({
     currentPage: 1,
     pageSize: 4,
     categories: [],
+    currentCategory: 'All',
+    orderedProducts: [],
   },
   getters: {
+    orderedProducts(state) {
+      return state.orderedProducts;
+    },
+    productsFilteredByCategory(state) {
+      return state.productList.filter((item) => state.currentCategory === 'All' || item.category === state.currentCategory);
+    },
     productList(state) {
       return state.productList;
     },
     categories(state) {
       return state.categories;
     },
-    processedProducts(state) {
+    processedProducts(state, getters) {
       const index = (state.currentPage - 1) * state.pageSize;
-      state.productList.sort((a, b) => {
-        if ((Number(a.price) > Number(b.price))) {
-          return 1;
-        } return -1;
-      });
-      return state.productList.slice(index, index + state.pageSize);
+      return getters.productsFilteredByCategory
+        .slice(index, index + state.pageSize);
+    },
+    categoryList(state) {
+      return ['All', ...new Set(state.products.map((p) => p.category).sort())];
     },
     pageCount(state) {
       return Math.ceil(state.productList.length / state.pageSize);
@@ -42,6 +49,11 @@ export default new Vuex.Store({
     },
     setPageSize(state, size) {
       state.pageSize = size;
+      state.currentPage = 1;
+    },
+    setCurrentCategory(state, category) {
+      console.log(category);
+      state.currentCategory = category;
       state.currentPage = 1;
     },
   },
