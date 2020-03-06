@@ -7,11 +7,13 @@ export default new Vuex.Store({
   state: {
     productList: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 3,
     categories: [],
     currentCategory: 'All',
     orderedProducts: [],
     isCheckOut: false,
+    searchItem: '',
+    showSearch: false,
   },
   getters: {
     isCheckOut(state) {
