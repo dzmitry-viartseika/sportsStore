@@ -82,7 +82,6 @@ export default new Vuex.Store({
       state.currentPage = 1;
     },
     setCurrentCategory(state, category) {
-      console.log(category);
       state.currentCategory = category;
       state.currentPage = 1;
     },
@@ -106,7 +105,6 @@ export default new Vuex.Store({
         .then((response) => {
           return response.json()
             .then((data) => {
-              console.log(data);
               commit('setCategories', data);
             }).catch((e) => {
               console.error(e);

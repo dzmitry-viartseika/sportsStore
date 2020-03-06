@@ -32,7 +32,6 @@ export default {
   methods: {
     ...mapMutations(['setCurrentPage', 'setPageSize']),
     changePageSize($event) {
-      console.log($event.target.value);
       this.setPageSize(Number($event.target.value));
     },
   },
