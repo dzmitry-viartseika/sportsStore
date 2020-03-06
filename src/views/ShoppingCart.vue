@@ -1,7 +1,6 @@
 <template>
     <div class="cart">
       <h1 class="cart__title">Your Cart</h1>
-      <div v-if="!isCheckOut">
         <div class="cart-table"
              v-if="orderedProducts.length > 0"
         >
@@ -30,33 +29,30 @@
           </div>
           <div class="cart-buttons">
             <button @click="proceedToBack()">Continue Shopping</button>
-            <button @click="thankModal()">Checkout</button>
+            <button @click="proceedToOrderInfo()">Checkout</button>
           </div>
         </div>
         <div v-else>
           Cart is empty
         </div>
-      </div>
-      <OrderThanks v-if="isCheckOut"></OrderThanks>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import OrderThanks from '../components/OrderThanks.vue';
 
 export default {
   name: 'ShoppingCart',
-  components: {
-    OrderThanks,
-  },
   computed: {
-    ...mapGetters(['orderedProducts', 'totalPrice', 'isCheckOut']),
+    ...mapGetters(['orderedProducts', 'totalPrice']),
   },
   methods: {
-    ...mapMutations(['removeFromCart', 'thankModal']),
+    ...mapMutations(['removeFromCart']),
     proceedToBack() {
       this.$router.push('/');
+    },
+    proceedToOrderInfo() {
+      this.$router.push('/checkout');
     },
   },
 };

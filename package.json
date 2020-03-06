@@ -18,6 +18,7 @@
     "json-server": "^0.16.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
+    "vee-validate": "^3.2.5",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vuelidate": "^0.7.5",
@@ -53,6 +54,7 @@
     "rules": {
       "rule": "off",
       "arrow-body-style": 0,
+      "max-len": ["error", { "code": 320 }],
       "arrow-parens": [
         "error",
         "always"

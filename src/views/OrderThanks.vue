@@ -22,15 +22,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .v-order-thank {
-    width: 400px;
-    padding: 20px;
-    z-index: 1;
-    min-height: 400px;
-    border: 1px solid black;
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-  }
+
 </style>
