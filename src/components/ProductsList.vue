@@ -2,7 +2,6 @@
     <div class="product">
       <div class="product-category">
         <div class="product-category__title">CATEGOTY</div>
-        <button @click="proceedToCart()">wer</button>
         <div v-for="(category,i) in categories"
              :key="i"
              class="product-category__item"
@@ -45,9 +44,6 @@ export default {
   methods: {
     ...mapActions(['fetchProducts', 'fetchCategories']),
     ...mapMutations(['setCurrentCategory', 'addToCart']),
-    proceedToCart() {
-      this.$router.push('/cart');
-    },
   },
   mounted() {
     this.fetchProducts();

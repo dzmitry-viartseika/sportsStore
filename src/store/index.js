@@ -11,8 +11,26 @@ export default new Vuex.Store({
     categories: [],
     currentCategory: 'All',
     orderedProducts: [],
+    isCheckOut: false,
   },
   getters: {
+    isCheckOut(state) {
+      return state.isCheckOut;
+    },
+    totalPrice(state) {
+      const res = [];
+      let result;
+      if (state.orderedProducts.length) {
+        state.orderedProducts.forEach((item) => {
+          res.push(item.price * item.quantity);
+        });
+        result = res.reduce((sum, el) => {
+          return sum + el;
+        });
+        return result.toFixed(2);
+      }
+      return 0;
+    },
     orderedProducts(state) {
       return state.orderedProducts;
     },
@@ -38,6 +56,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    thankModal(state) {
+      state.isCheckOut = true;
+    },
     addToCart(state, product) {
       state.orderedProducts.push({
         ...product,
