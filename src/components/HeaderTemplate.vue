@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'HeaderTemplate',
@@ -22,9 +22,13 @@ export default {
     ...mapGetters(['orderedProducts', 'totalPrice']),
   },
   methods: {
+    ...mapActions(['initialeCart']),
     proceedToCart() {
       this.$router.push('/cart');
     },
+  },
+  created() {
+    this.initialeCart(this.$store);
   },
 };
 </script>

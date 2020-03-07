@@ -58,6 +58,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setOrderedProducts(state, data) {
+      state.orderedProducts = data;
+    },
     thankModal(state) {
       state.isCheckOut = true;
     },
@@ -89,6 +92,26 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    loadOrderedProducts(context) {
+      const data = localStorage.getItem('cart');
+      if (data !== null) {
+        context.commit('setOrderedProducts', JSON.parse(data));
+      }
+    },
+    storeOrderedProducts(context) {
+      console.log(context);
+      localStorage.setItem('cart', JSON.stringify(context.state.orderedProducts));
+    },
+    clearOrderedProducts(context) {
+      context.commit('setOrderedProducts', []);
+    },
+    initialeCart(context, store) {
+      context.dispatch('loadOrderedProducts');
+      store.watch((state) => state.orderedProducts,
+        () => context.dispatch('storeOrderedProducts'), {
+          deep: true,
+        });
+    },
     fetchProducts({ commit }) {
       const url = 'http://localhost:3500/goods';
       fetch(url)

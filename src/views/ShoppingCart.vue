@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 export default {
   name: 'ShoppingCart',
@@ -48,12 +48,16 @@ export default {
   },
   methods: {
     ...mapMutations(['removeFromCart']),
+    ...mapActions(['initialeCart']),
     proceedToBack() {
       this.$router.push('/');
     },
     proceedToOrderInfo() {
       this.$router.push('/checkout');
     },
+  },
+  created() {
+    this.initialeCart(this.$store);
   },
 };
 </script>
