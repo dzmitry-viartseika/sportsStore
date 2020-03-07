@@ -24,6 +24,10 @@ const routes = [
     component: OrderThanks,
   },
   {
+    path: '*',
+    redirect: '/',
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: Cart,
